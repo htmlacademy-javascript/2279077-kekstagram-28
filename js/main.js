@@ -66,17 +66,14 @@ const getRandomInteger = (a, b) => {
 const describePhotoArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 
-const describePhoto = () => {
-  return {
-    id: describePhotoArrayElement(ID),
-    avatar: describePhotoArrayElement (AVATAR),
-    description: describePhotoArrayElement (DESCRIPTION),
-    likes: describePhotoArrayElement (LIKES),
-    comments: describePhotoArrayElement (COMMENTS),
-    name: describePhotoArrayElement (NAME),
-  };
-};
+const describePhoto = () => ({
+  id: describePhotoArrayElement(ID),
+  avatar: describePhotoArrayElement (AVATAR),
+  description: describePhotoArrayElement (DESCRIPTION),
+  likes: describePhotoArrayElement (LIKES),
+  comments: describePhotoArrayElement (COMMENTS),
+  name: describePhotoArrayElement (NAME),
+});
 
 const similarPhoto = Array.from ({length: SIMILAR_PHOTO_COUNT}, describePhoto);
-
-console.log(similarPhoto);
+similarPhoto();
