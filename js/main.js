@@ -34,10 +34,10 @@ const getRandomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 
-const createMessage = () =>
-  Array.from({ length: getRandomInteger(1, 2)}, () =>
-    getRandomArrayElement(COMMENTS)
-  ).join(' ');
+const createMessage = () => {
+  const message = Array.from({ length: getRandomInteger(1, 2)}, () => getRandomArrayElement(COMMENTS));
+  return Array.from(new Set(message)).join(' ');
+};
 
 const createComment = () => {
   const comment = {
