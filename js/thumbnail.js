@@ -12,17 +12,16 @@ const createThumbnail = (data) => {
   thumbnail.querySelector('.picture__img').alt = data.description;
   thumbnail.querySelector('.picture__comments').textContent = data.comments.length;
   thumbnail.querySelector('.picture__likes').textContent = data.likes;
-  thumbnail.dataset.id = data.id;
 
-  thumbnail.addEventListener('click', () => {
+  thumbnail.addEventListener('click', (event) => {
+    event.preventDefault();
     openBigPicture(data);
   });
-
   return thumbnail;
 };
 
 const renderThumbnails = () => {
-  pictures.forEach((picture) => container.append(createThumbnail(picture)));
+  pictures.forEach((data) => container.append(createThumbnail(data)));
 };
 
 export {renderThumbnails};
