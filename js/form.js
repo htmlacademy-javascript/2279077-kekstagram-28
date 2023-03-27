@@ -16,14 +16,14 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__field-wrapper__error',
 });
 
-const showModal = () => {
+const openModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 
 };
 
-const hideModal = () => {
+const closeModal = () => {
   form.reset();
   pristine.reset();
   overlay.classList.add('hidden');
@@ -38,16 +38,16 @@ const isTextFieldFocused = () =>
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !isTextFieldFocused()) {
     evt.preventDefault();
-    hideModal();
+    closeModal();
   }
 }
 
 const onCancelButtonClick = () => {
-  hideModal();
+  closeModal();
 };
 
 const onFileInputChange = () => {
-  showModal();
+  openModal();
 };
 
 const isValidTag = (tag) => VALID_SYMBOLS.test(tag);
@@ -78,6 +78,10 @@ const onFormSubmit = (evt) => {
   pristine.validate();
 };
 
-fileField.addEventListener('change', onFileInputChange);
-cancelButton.addEventListener('click', onCancelButtonClick);
-form.addEventListener('submit', onFormSubmit);
+const addFormAction = () => {
+  fileField.addEventListener('change', onFileInputChange);
+  cancelButton.addEventListener('click', onCancelButtonClick);
+  form.addEventListener('submit', onFormSubmit);
+};
+
+export {addFormAction};
