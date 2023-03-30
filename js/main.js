@@ -1,5 +1,5 @@
-import {renderThumbnails} from './thumbnail.js';
+import {getPicrutesData} from './thumbnail.js';
 import {addFormAction} from './form.js';
 
-renderThumbnails();
+getPicrutesData();
 addFormAction();
