@@ -1,6 +1,9 @@
 import {resetScale} from './scale.js';
 import {resetEffects} from './effects.js';
+import {sendData} from './api.js';
+import {renderFailMessage, renderSuccessMessage} from './send-messages.js';
 
+const GET_URL = 'https://28.javascript.pages.academy/kekstagram';
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAG_COUNT = 5;
 const TAG_ERROR_TEXT = 'Хэштег введён некорректно';
@@ -13,20 +16,29 @@ const fileField = document.querySelector('#upload-file');
 const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
 
+const onSendSuccess = () => {
+  renderSuccessMessage();
+  closeModal();
+};
+
+const onSendFail = () => {
+  renderFailMessage();
+};
+
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper__error',
 });
 
-const openModal = () => {
+function openModal () {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 
-};
+}
 
-const closeModal = () => {
+function closeModal() {
   form.reset();
   resetScale();
   resetEffects();
@@ -34,7 +46,7 @@ const closeModal = () => {
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-};
+}
 
 const isTextFieldFocused = () =>
   document.activeElement === hashtagField ||
@@ -42,6 +54,9 @@ const isTextFieldFocused = () =>
 
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !isTextFieldFocused()) {
+    if (document.querySelector('.error')) {
+      return;
+    }
     evt.preventDefault();
     closeModal();
   }
@@ -80,7 +95,9 @@ pristine.addValidator(
 
 const onFormSubmit = (evt) => {
   evt.preventDefault();
-  pristine.validate();
+  if (pristine.validate()) {
+    sendData(GET_URL, onSendSuccess, onSendFail, new FormData(evt.target));
+  }
 };
 
 const addFormAction = () => {
