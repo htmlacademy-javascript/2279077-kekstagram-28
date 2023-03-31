@@ -15,14 +15,17 @@ const cancelButton = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const onSendSuccess = () => {
   renderSuccessMessage();
   closeModal();
+  submitButton.disabled = false;
 };
 
 const onSendFail = () => {
   renderFailMessage();
+  submitButton.disabled = false;
 };
 
 const pristine = new Pristine(form, {
@@ -96,6 +99,7 @@ pristine.addValidator(
 const onFormSubmit = (evt) => {
   evt.preventDefault();
   if (pristine.validate()) {
+    submitButton.disabled = true;
     sendData(GET_URL, onSendSuccess, onSendFail, new FormData(evt.target));
   }
 };
