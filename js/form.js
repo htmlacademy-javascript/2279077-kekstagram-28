@@ -16,6 +16,7 @@ const fileField = document.querySelector('#upload-file');
 const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
+const imageElement = document.querySelector('.img-upload__preview img');
 
 const onSendSuccess = () => {
   renderSuccessMessage();
@@ -104,8 +105,14 @@ const onFormSubmit = (evt) => {
   }
 };
 
+const onImageDownloadInput = () => {
+  const image = fileField.files[0];
+  imageElement.src = URL.createObjectURL(image);
+};
+
 const addFormAction = () => {
   fileField.addEventListener('change', onFileInputChange);
+  fileField.addEventListener('input', onImageDownloadInput);
   cancelButton.addEventListener('click', onCancelButtonClick);
   form.addEventListener('submit', onFormSubmit);
 };
