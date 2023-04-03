@@ -39,7 +39,6 @@ function openModal () {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-
 }
 
 function closeModal() {
@@ -66,12 +65,12 @@ function onDocumentKeydown(evt) {
   }
 }
 
-const onCancelButtonClick = () => {
-  closeModal();
-};
+const onCancelButtonClick = () => closeModal();
 
 const onFileInputChange = () => {
   openModal();
+  const image = fileField.files[0];
+  imageElement.src = URL.createObjectURL(image);
 };
 
 const isValidTag = (tag) => VALID_SYMBOLS.test(tag);
@@ -105,14 +104,8 @@ const onFormSubmit = (evt) => {
   }
 };
 
-const onImageDownloadInput = () => {
-  const image = fileField.files[0];
-  imageElement.src = URL.createObjectURL(image);
-};
-
 const addFormAction = () => {
   fileField.addEventListener('change', onFileInputChange);
-  fileField.addEventListener('input', onImageDownloadInput);
   cancelButton.addEventListener('click', onCancelButtonClick);
   form.addEventListener('submit', onFormSubmit);
 };

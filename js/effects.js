@@ -115,6 +115,7 @@ noUiSlider.create(sliderElement, {
   step: DEFAULT_EFFECT.step,
   connect: 'lower',
 });
+
 closeSlider();
 
 effectsElement.addEventListener('change', onEffectsChange);

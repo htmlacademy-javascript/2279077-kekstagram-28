@@ -15,7 +15,7 @@ const rerenderThumbnails = (data, id) => {
   let sortArray = dataCopy;
   removeElements(document.querySelectorAll('.picture'));
   if (id === 'filter-discussed') {
-    sortArray = dataCopy.sort((a, b) => a.comments.length - b.comments.length);
+    sortArray = dataCopy.sort((a, b) => b.comments.length - a.comments.length);
   }
   if (id === 'filter-random') {
     sortArray = shuffleArray(dataCopy).slice(0, RANDOM_COMMENTS_COUNT);
