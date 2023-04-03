@@ -1,4 +1,5 @@
 const ERROR_TIMEOUT = 5000;
+const ERROR_TEXT = 'Произошла ошибка загрузки';
 
 const onGetFail = () => {
   const errorBlock = document.createElement('div');
@@ -11,7 +12,7 @@ const onGetFail = () => {
   errorBlock.style.textAlign = 'center';
   errorBlock.style.padding = '20px';
   errorBlock.style.backgroundColor = 'white';
-  errorBlock.textContent = 'Произошла ошибка загрузки';
+  errorBlock.textContent = ERROR_TEXT;
   document.body.append(errorBlock);
 
   setTimeout(() => {

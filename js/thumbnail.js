@@ -32,6 +32,6 @@ const onGetSuccess = (data) => {
   initFilter(data);
 };
 
-const getPicrutesData = () => getData(GET_URL, onGetSuccess, onGetFail);
+const getPicturesData = () => getData(GET_URL, onGetSuccess, onGetFail);
 
-export {getPicrutesData, renderThumbnails};
+export {getPicturesData, renderThumbnails};
