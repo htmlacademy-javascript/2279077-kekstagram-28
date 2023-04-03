@@ -2,6 +2,7 @@ const SCALE_STEP = 25;
 const MIN_SCALE = 25;
 const MAX_SCALE = 100;
 const DEFAULT_SCALE = 100;
+const PERCENT_DIVIDER = 100;
 
 const smallerButtonElement = document.querySelector('.scale__control--smaller');
 const biggerButtonElement = document.querySelector('.scale__control--bigger');
@@ -9,7 +10,7 @@ const scaleInputElement = document.querySelector('.scale__control--value');
 const imageElement = document.querySelector('.img-upload__preview img');
 
 const scaleImage = (value) => {
-  imageElement.style.transform = `scale(${value / 100})`;
+  imageElement.style.transform = `scale(${value / PERCENT_DIVIDER})`;
   scaleInputElement.value = `${value}%`;
 };
 
