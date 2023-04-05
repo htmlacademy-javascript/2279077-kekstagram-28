@@ -35,11 +35,11 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__field-wrapper__error',
 });
 
-function openModal () {
+const openModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-}
+};
 
 function closeModal() {
   form.reset();
