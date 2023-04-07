@@ -18,12 +18,6 @@ const commentField = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
 const imageElement = document.querySelector('.img-upload__preview img');
 
-const onSendSuccess = () => {
-  renderSuccessMessage();
-  closeModal();
-  submitButton.disabled = false;
-};
-
 const onSendFail = () => {
   renderFailMessage();
   submitButton.disabled = false;
@@ -41,7 +35,7 @@ const openModal = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function closeModal() {
+const closeModal = () => {
   form.reset();
   resetScale();
   resetEffects();
@@ -49,7 +43,13 @@ function closeModal() {
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-}
+};
+
+const onSendSuccess = () => {
+  renderSuccessMessage();
+  closeModal();
+  submitButton.disabled = false;
+};
 
 const isTextFieldFocused = () =>
   document.activeElement === hashtagField ||
